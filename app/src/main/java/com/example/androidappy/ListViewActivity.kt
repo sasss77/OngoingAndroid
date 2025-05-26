@@ -5,12 +5,15 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
@@ -40,7 +43,23 @@ fun listView() {
     {
             innerPadding ->
         val scrollState = rememberScrollState()
-        Column(modifier = Modifier.padding(innerPadding).fillMaxSize().verticalScroll(scrollState)){
+        val scrollState2 = rememberScrollState()
+        Column(modifier = Modifier.padding(innerPadding).fillMaxSize().verticalScroll(scrollState2)){
+
+            Row(modifier = Modifier.fillMaxWidth().horizontalScroll(scrollState)) {
+                Box(
+                    modifier = Modifier.size(120.dp).background(color = Color.Blue)
+                )
+                Box(
+                    modifier = Modifier.size(120.dp).background(color = Color.Yellow)
+                )
+                Box(
+                    modifier = Modifier.size(120.dp).background(color = Color.Red)
+                )
+                Box(
+                    modifier = Modifier.size(120.dp).background(color = Color.Gray)
+                )
+            }
 
             Box( modifier = Modifier.height(200.dp).
             fillMaxWidth().padding(20.dp).background(color = Color.Green))

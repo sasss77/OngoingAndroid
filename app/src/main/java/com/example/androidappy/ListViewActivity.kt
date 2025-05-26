@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
@@ -14,13 +15,19 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.androidappy.ui.theme.AndroidAppyTheme
@@ -38,29 +45,55 @@ class ListViewActivity : ComponentActivity() {
 
 @Composable
 fun listView() {
+        val images = listOf(R.drawable.image,
+        (R.drawable.google),
+        (R.drawable.gacebook),
+        (R.drawable.man),
+            (R.drawable.fb)
+    )
+    val name = listOf(
+        "eye",
+        "google",
+        "Facebook",
+        "Man",
+        "fb2"
+    )
 
     Scaffold()
     {
-            innerPadding ->
-        val scrollState = rememberScrollState()
-        val scrollState2 = rememberScrollState()
-        Column(modifier = Modifier.padding(innerPadding).fillMaxSize().verticalScroll(scrollState2)){
 
-            Row(modifier = Modifier.fillMaxWidth().horizontalScroll(scrollState)) {
+            innerPadding ->
+        LazyColumn(modifier = Modifier.padding(innerPadding).fillMaxSize()){
+            item {
+
+            LazyRow(modifier = Modifier.fillMaxWidth()) {
+                items(images.size) {index ->
+                    Image(
+                        painterResource(images[index]), contentDescription = null,
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier.size(120.dp).clip(shape = CircleShape)
+                    )
+                }
+
+            }
+            LazyRow(modifier = Modifier.fillMaxWidth()) {
+                item {
+
                 Box(
-                    modifier = Modifier.size(120.dp).background(color = Color.Blue)
+                    modifier = Modifier.size(120.dp).background(color = Color.Blue).padding( 10.dp)
                 )
                 Box(
-                    modifier = Modifier.size(120.dp).background(color = Color.Yellow)
+                    modifier = Modifier.size(120.dp).background(color = Color.Yellow).padding( 10.dp)
                 )
                 Box(
-                    modifier = Modifier.size(120.dp).background(color = Color.Red)
+                    modifier = Modifier.size(120.dp).background(color = Color.Red).padding( 10.dp)
                 )
                 Box(
-                    modifier = Modifier.size(120.dp).background(color = Color.Gray)
+                    modifier = Modifier.size(120.dp).background(color = Color.Gray).padding( 10.dp)
                 )
             }
 
+                }
             Box( modifier = Modifier.height(200.dp).
             fillMaxWidth().padding(20.dp).background(color = Color.Green))
             Box( modifier = Modifier.height(200.dp).
@@ -78,6 +111,7 @@ fun listView() {
 
 
         }
+            }
 
     }
 }
